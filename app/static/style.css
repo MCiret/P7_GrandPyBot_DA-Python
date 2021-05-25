@@ -1,0 +1,57 @@
+html, body
+{
+    height: 100%;
+}
+
+#logo
+{
+    margin: 20px;
+    box-shadow: 6px 6px 6px black;
+}
+
+.container1
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container2
+{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    text-align: center;
+    font-weight: bold;
+}
+
+h1, h2
+{
+    text-align: center;
+}
+
+#user_request
+{
+    width: 80%;
+    min-width: 300px;
+}
+
+#question
+{
+width: 80%;
+min-width: 300px;
+}
+
+#chat
+{
+    height: 50vh;
+    overflow: auto;
+    text-align: justify;
+    border: 2px dotted #680dec;
+    padding-left: 10px;
+}
+
+#msg
+{
+    margin-bottom: 30px;
+}
