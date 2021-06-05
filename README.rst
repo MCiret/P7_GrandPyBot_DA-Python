@@ -33,6 +33,8 @@ This Web application suggests questioning for locating a place to user by enteri
 A robot (GrandPy Bot) parses the text input and requests here.com API to obtain and display the place address and a map marked with it.
 It also requests Wikipedia API to obtain an article (if it exists) about the place and display the url and the start of it.
 
+*NB: this source code is for french User Interface.*
+
 Feature and scenario
 --------------------
 A user could asks GrandPy Bot a place name in order to obtain the address.
@@ -83,8 +85,8 @@ Steps
 
         3.4) Activate the virtual environment : $ source name_of_your_virtual_env/bin/activate
 
-    * DOS operating system :
 
+    * DOS operating system :
         3.1) Install the Python module : $ pip install venv
 
         3.2) Navigate to the project main directory using command prompt : $ cd .....
