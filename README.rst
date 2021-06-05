@@ -3,19 +3,19 @@
 =====================
 **Searching for a spot address**
 
-|Status badge|
+|Status badge| |UIlanguage|
 
 *****************
 TABLE OF CONTENTS
 *****************
 
 1. `DESCRIPTION`_
-    * `Features`_
+    * `Summary`_
+    * `Feature and scenario`_
 
 2. `INSTALLATION`_
-    * `Database installation`_
-    * `Application`_
-    * `Requirements`_
+    * `Steps`_
+    * `Required libraries`_
 
 3. `USAGE`_
     * `json data examples`_
@@ -25,58 +25,49 @@ TABLE OF CONTENTS
 
 DESCRIPTION
 ===========
-This program asks user for choosing a food product in a local database and searches for an healthy alternative.
-The user could back up each result in the local database to read it later.
 
-Data in local database comes from Open Food Facts (OFF) french database (requested via the OFF search API). The retrieved json
-data are parsed, reorganized and inserted in the local database.
+Summary
+-------
+This Web application suggests questioning for locating a place to user by entering a question in an text input field and submit it.
 
-Features
---------
-I. A user could choose a food product in order to obtain an healthy substitution (Main menu choice 1-).
+A robot (GrandPy Bot) parses the text input and requests here.com API to obtain and display the place address and a map marked with it.
+It also requests Wikipedia API to obtain an article (if it exists) about the place and display the url and the start of it.
 
-    I.1 Load data :
-        I.1.1 Requests the OFF search API (see response.json_).
+Feature and scenario
+--------------------
+A user could asks GrandPy Bot a place name in order to obtain the address.
 
-        I.1.2 Reorganized json responses (see valid_product.json_):
+1) User asks GrandPy Bot a place name that is locatable by here.com and have a Wikipedia article.
 
-            * Keeps only products dictionaries and makes one list with all of them valid (= has the required fields).
-            * Selects and translates categories (often in english in OFF search API responses).
+    **Given** I am a user who is asking for a place address,
 
-        I.1.3 Inserts in the local database (see Installation section below for more information).
+    **When** GrandPy Bot answers me,
 
-    I.2 User Interface (terminal) :
+    **Then** he displays a message informing me of the address, the start of Wikipedia article and its url and the here.com marked map.
 
-        I.2.1 Display numbered food products categories and ask user for choosing one. Then display numbered food
-        products (belonging to the chosen category) and propose choosing one or going back to the categories choice.
+2) User asks GrandPy Bot a place name that is not locatable by here.com.
 
-        I.2.2 Compare the chosen food products to those having the same "compared_to_category" field to find a substitution
-        (i.e with a better Nutri-Score).
+    **Given** I am a user who is asking for a place address,
 
-        I.2.3 Display the substitution results : infos about the substituted food product and infos about the substitution food(s) found.
+    **When** GrandPy Bot answers me,
 
-II. A user could back up a food product substitution in order to keep it in memory as a favorite.
+    **Then** he displays a message informing me of incapacity to locate this place.
 
-        * User Interface (terminal) : when substitution results are displayed (see I.2.3), it proposes for recording in the database.
+3) User asks GrandPy Bot a place name that is locatable by here.com but do not have a Wikipedia article.
 
-III. A user could get back his food product substitution favorites in order to read information without
-repeating the research (Main menu choice 2-).
+    **Given** I am a user who is asking for a place address,
 
-        * User Interface (terminal) : displays recorded substitution resumed results and it proposes for displaying more infos about one of them.
+    **When** GrandPy Bot answers me,
+
+    **Then** he displays a message informing me of the address and the here.com marked map.
 
 INSTALLATION
 ============
 
-Database installation
----------------------
+Steps
+-----
 
-1) Install MySQL SGDB and then modify DB_PARAM dict (in config.py) to replace it with your database connection parameters.
-2) Create the database by executing database_managers/pur_beurre_db_creation.sql (see Physical Data Model local_db_PDM_).
-
-Application
------------
-
-1) Download the project : use the "Code" (green button) and unzip the P5_PurBeurre-Food-Substitution_DA-Python-master/
+1) Download the project : use the "Code" (green button) and unzip the P7_GrandPyBot_DA-Python-master.zip file.
 2) Python3 comes with Python Package Manager (pip) else you have to install it (https://pip.pypa.io/en/stable/installing/)
 
 3) Set up a virtual environment :
@@ -103,23 +94,24 @@ Application
         3.4) Activate the virtual environment : $ .\name_of_your_virtual_env\Scripts\activate
 
 
-4) Install required libraries :
-    * using the provided text file : $ pip install -r requirements.txt
-    * OR install manually each Python package (see Requirements section below)
+4) Install required libraries : see the Required libraries section below.
 
-5) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
+5) Set your personnel parameters for here.com API access :
+    * Get a free apikey by creating a "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account
+    * Copy + Paste your apikey as a string value replacing the '******' of HERE_API_KEY constant variable in config.py file.
 
-    ↳ Usage: [-h|--help] [-ld|--load_data] [-p|--page PAGE] [-v|--verbose]
+6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 
-Requirements
-------------
+7) Click on the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) to display interface in your browser.
+
+Required libraries
+------------------
 |vPython badge|
 |vHTML badge| |vCSS badge| |JavaScript badge|
 
 
-Python libraries (see requirements.txt):
+Python libraries to install in your virtual environment : $ pip install -r requirements.txt
 
-* ici copié+collé le contenu de requirements.txt
 
 USAGE
 =====
@@ -175,3 +167,4 @@ Table 'store' :
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
 
 .. |Status badge| image:: https://img.shields.io/badge/Status-Development-orange.svg
+.. |UIlanguage badge| image:: https://img.shields.io/badge/UI language-French-9cf.svg
