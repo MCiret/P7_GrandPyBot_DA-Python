@@ -3,6 +3,8 @@
 =====================
 **Searching for a spot address**
 
+|Status badge|
+
 *****************
 TABLE OF CONTENTS
 *****************
@@ -171,3 +173,5 @@ Table 'store' :
 .. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
 .. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
+
+.. |Status badge| image:: https://img.shields.io/badge/Status-Development-orange.svg
