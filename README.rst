@@ -169,7 +169,7 @@ Table 'store' :
 .. _local_db_PDM:
 .. image:: ./ImagesReadme/local_db_schema.png
 
-.. |vPython badge| image:: https://img.shields.io/badge/python-v3.8-blue.svg
+.. |vPython badge| image:: https://img.shields.io/badge/Python-3.8-blue.svg
 .. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
 .. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
