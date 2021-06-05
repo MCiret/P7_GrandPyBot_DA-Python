@@ -167,4 +167,4 @@ Table 'store' :
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
 
 .. |Status badge| image:: https://img.shields.io/badge/Status-Development-orange.svg
-.. |UIlanguage badge| image:: https://img.shields.io/badge/UI language-French-9cf.svg
+.. |UIlanguage badge| image:: https://img.shields.io/badge/UI-language-French-9cf.svg
