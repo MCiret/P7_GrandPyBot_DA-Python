@@ -8,34 +8,46 @@
     <title>GrandPy Bot</title>
 </head>
 <body>
-    <header>
-        <div class="container1">
-            <p>
-                <img src="../static/Robot_logo_200x112.png" alt="Logo robot"/>
-                <div>
-                    <h1>Bonjour, je suis GrandPy Bot.</h1>
-                    <h2>Je vous souhaite la bienvenue et j'ai plein de choses à vous raconter !!</h2>
-                </div>
-            </p>
-        </div>
-    </header>
+    <div id="body_grid">
+        <header>
+            <div class="head_foot_container">
+                <img id="robot_logo" src="../static/Robot_logo_200x112.png" alt="Logo robot"/>
+                    <div id="titles_container">
+                        <h1>Bonjour, je suis GrandPy Bot.</h1>
+                        <h2>Je vous souhaite la bienvenue et j'ai plein de choses à vous raconter 😉</h2>
+                    </div>
+            </div>
+        </header>
 
-    <div class="container2">
-        ⊱⊱⊱ Votre conversation avec GrandPy Bot ⊰⊰⊰
-        <div id="chat">
+        <div id="main_container">
+            <div id="chat_map_container">
+                <div id="chat"></div>
+                <div id="map"></div>
+            </div>
+            <form id="user_request">
+                <p>
+                    <label for="question"> Quel lieu recherchez-vous ? </label>
+                    <input type="text" name="question" id="question" placeholder="posez votre question ici">
+                    <input type="submit" value="Envoyer">
+                </p>
+            </form>
         </div>
-        <form id="user_request">
-            <p>
-                <label for="question"> Que recherchez-vous ? </label>
-                <input type="text" name="question" id="question" placeholder="posez votre question ici">
-                <input type="submit" value="Envoyer">
-            </p>
-        </form>
+
+        <footer>
+            <div class="head_foot_container">
+                <p>Marie Ciret</p>
+                <p>
+                    <a href="https://github.com/MCiret/P7_GrandPyBot_DA-Python">
+                        <img src="../static/github-logo.svg" alt="logo github">GitHub
+                    </a>
+                </p>
+            </div>
+        </footer>
     </div>
-
-    <footer>
-    </footer>
-
-    <script src="../static/script.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/one_discuss.js"></script>
+    <script src="../static/chat.js"></script>
+    <script src="../static/map.js"></script>
 </body>
 </html>

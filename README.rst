@@ -18,7 +18,7 @@ TABLE OF CONTENTS
 3. `USAGE`_
     * `json data examples`_
     * `Database`_
-    * `OFF Search API query`_  
+    * `OFF Search API query`_
         1) Default usage
 
 DESCRIPTION
@@ -85,26 +85,26 @@ Application
         3.1) Install the Python module : $ pip install venv
 
         3.2) Navigate to the project main directory using command prompt : $ cd .....
-        
+
         3.3) Create a virtual environment : $ python -m venv name_of_your_virtual_env
-        
+
         3.4) Activate the virtual environment : $ source name_of_your_virtual_env/bin/activate
-        
+
     * DOS operating system :
-        
+
         3.1) Install the Python module : $ pip install venv
-        
+
         3.2) Navigate to the project main directory using command prompt : $ cd .....
-        
+
         3.3) Create a virtual environment : $ py -m venv name_of_your_virtual_env
-        
+
         3.4) Activate the virtual environment : $ .\name_of_your_virtual_env\Scripts\activate
-        
+
 
 4) Install required libraries :
     * using the provided text file : $ pip install -r requirements.txt
     * OR install manually each Python package (see Requirements section below)
-  
+
 5) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 
     ↳ Usage: [-h|--help] [-ld|--load_data] [-p|--page PAGE] [-v|--verbose]
@@ -112,6 +112,8 @@ Application
 Requirements
 ------------
 |vPython badge|
+|vHTML badge| |vCSS badge| |JavaScript badge|
+
 
 Python libraries (see requirements.txt):
 
@@ -151,7 +153,7 @@ Table 'food' :
 * "quantity" = quantity (optional field, used to specify some food product having same name but different barcode because of different quantity).
 * "compared_to_category" = compared_to_category (unique keyword used to find a relevant substitution food).
 
-Table 'category' : 
+Table 'category' :
 
 * "categories_tags" = list where each element is a row in the table (name field)
 
@@ -166,3 +168,6 @@ Table 'store' :
 .. image:: ./ImagesReadme/local_db_schema.png
 
 .. |vPython badge| image:: https://img.shields.io/badge/python-v3.8-blue.svg
+.. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
+.. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
+.. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
