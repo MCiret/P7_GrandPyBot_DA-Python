@@ -146,7 +146,7 @@ Wikipedia API response parsed by the back_end and returned to the front-end :
 
 
 
-.. |vPython badge| image:: https://img.shields.io/badge/Python-3.8-blue.svg
+.. |vPython badge| image:: https://img.shields.io/badge/Python-3.9-blue.svg
 .. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
 .. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
