@@ -151,5 +151,5 @@ Wikipedia API response parsed by the back_end and returned to the front-end :
 .. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
 
-.. |Status badge| image:: https://img.shields.io/badge/Status-Development-orange.svg
+.. |Status badge| image:: https://img.shields.io/badge/Status-Production-brightgreen.svg
 .. |UIlanguage badge| image:: https://img.shields.io/badge/UI-French-9cf.svg
