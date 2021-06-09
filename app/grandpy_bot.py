@@ -1,6 +1,6 @@
 import config as cfg
 import app.api_requests as api
-# from app.parser import Parser
+from app.parser import Parser
 
 
 def parse_question(whole_question: str) -> dict:
