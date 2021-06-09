@@ -10,7 +10,7 @@ class Parser:
     Static methods are used for interesting tokens selection or strings formatting.
     """
 
-    NLP = spacy.load('fr_core_news_md')
+    NLP = spacy.load('fr_core_news_sm')
     WANTED_ENT_TYPE = ('LOC', 'GPE', 'FAC')
     NOT_WANTED_NOUN = ('bonjour', 'hello', 'aurevoir', 'au revoir', 'gpy', 'grandpy', 'salut')
 

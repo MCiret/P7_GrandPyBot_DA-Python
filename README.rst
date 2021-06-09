@@ -119,7 +119,7 @@ USAGE
 UI example
 ----------
 
-.. image:: ./readme_images/Grandpy_Bot_example.png
+.. image:: ./readme_images/Grandpy_Bot_example.jpg
 
 API data
 --------

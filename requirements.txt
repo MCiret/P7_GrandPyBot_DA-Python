@@ -9,7 +9,6 @@ docutils==0.17.1
 filelock==3.0.12
 flake8==3.9.2
 Flask==2.0.0
-fr-core-news-md @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_md-3.0.0/fr_core_news_md-3.0.0-py3-none-any.whl
 fr-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.0.0/fr_core_news_sm-3.0.0-py3-none-any.whl
 idna==2.10
 iniconfig==1.1.1
