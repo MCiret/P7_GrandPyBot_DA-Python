@@ -1,7 +1,7 @@
 import app.grandpy_bot as gpy
 
 
-def test_parse_question_return_none_if_not_ok(monkeypatch):
+def test_parse_question_return_none_if_failure(monkeypatch):
     def mock_extract_interesting_tokens(parser):
         mock_extract_interesting_tokens.called = True
         parser.interesting_tokens = []
@@ -14,45 +14,27 @@ def test_parse_question_return_none_if_not_ok(monkeypatch):
     assert mock_extract_interesting_tokens.called
 
 
-def test_parse_question_return_dict_if_ok(monkeypatch):
+def test_parse_question_return_dict_if_success(monkeypatch):
     def mock_extract_interesting_tokens(parser):
         mock_extract_interesting_tokens.called = True
-        parser.interesting_tokens = ["tokens"]
-
-    def mock_capitalize(text):
-        mock_capitalize.called = True
-        return "capit"
-
-    def mock_decapitalize(text):
-        mock_decapitalize.called = True
-        return "decapit"
+        parser.interesting_tokens = ["some", "tokens"]
 
     def mock_word_reverse_case_first_char(word):
         mock_word_reverse_case_first_char.called = True
         return "reversed_case"
 
     monkeypatch.setattr('app.parser.Parser.extract_interesting_tokens', mock_extract_interesting_tokens)
-    monkeypatch.setattr('app.parser.Parser.capitalize_all_words', mock_capitalize)
-    monkeypatch.setattr('app.parser.Parser.decapitalize_all_words', mock_decapitalize)
     monkeypatch.setattr('app.parser.Parser.word_reverse_case_first_char', mock_word_reverse_case_first_char)
 
     mock_extract_interesting_tokens.called = False
-    mock_capitalize.called = False
-    mock_decapitalize.called = False
     mock_word_reverse_case_first_char.called = False
     parse_question_result = {
-        'formated': {
-            'parsed_key_words': "tokens",
-            'capitalized': "capit",
-            'decapitalized': "decapit",
-        },
-        'singled': (("tokens", "Tokens"),)
+        'formated_original_key_words': "Some Tokens",
+        'singled_key_words': (("some", "Some"), ("tokens", "Tokens"),)
     }
 
     gpy.parse_question("qu") == parse_question_result
     assert mock_extract_interesting_tokens.called
-    assert mock_decapitalize.called
-    assert mock_capitalize.called
     assert mock_word_reverse_case_first_char.called
 
 
@@ -116,19 +98,16 @@ def test_wiki_infos_is_using_passed_argument(monkeypatch):
     assert mock_resp_dict_to_wiki_infos.params["resp_dict"] == "wiki_api_request_resp_dict"
 
 
-def test_try_formated_key_words(monkeypatch):
-    formated_key_words = {
-        "parsed_key_words": "pkw",
-        "capitalized": "capit",
-        "decapitalized": "decapit",
-    }
-
+def test_try_original_key_words_when_api_succeed_both_using_map_api_key_words_for_wiki_api(monkeypatch):
     def mock_maps_position(key_word):
         mock_maps_position.called = True
-        return {"map_resp": True}
+        return {
+            "key_words": "wiki key words",
+            "map_resp": True}
 
     def mock_wiki_infos(key_word):
         mock_wiki_infos.called = True
+        mock_wiki_infos.params = {"kw": key_word}
         return {"wiki_resp": True}
 
     monkeypatch.setattr('app.grandpy_bot.maps_position', mock_maps_position)
@@ -137,12 +116,85 @@ def test_try_formated_key_words(monkeypatch):
     mock_maps_position.called = False
     mock_wiki_infos.called = False
 
-    assert gpy.try_formated_key_words(formated_key_words) == {"map_resp": True, "wiki_resp": True}
+    assert gpy.try_original_key_words("original key words") == {
+        "key_words": "wiki key words",
+        "map_resp": True,
+        "wiki_resp": True
+    }
+    assert mock_maps_position.called
+    assert mock_wiki_infos.called
+    assert mock_wiki_infos.params["kw"] == "wiki_key_words"
+
+
+def test_try_original_key_words_when_api_succeed_both_using_original_key_words(monkeypatch):
+    def mock_maps_position(key_word):
+        mock_maps_position.called = True
+        return {
+            "key_words": None,
+            "map_resp": True}
+
+    def mock_wiki_infos(key_word):
+        mock_wiki_infos.called = True
+        mock_wiki_infos.params = {"kw": key_word}
+        return {"wiki_resp": True}
+
+    monkeypatch.setattr('app.grandpy_bot.maps_position', mock_maps_position)
+    monkeypatch.setattr('app.grandpy_bot.wiki_infos', mock_wiki_infos)
+
+    mock_maps_position.called = False
+    mock_wiki_infos.called = False
+
+    assert gpy.try_original_key_words("original key words") == {
+        "key_words": None,
+        "map_resp": True,
+        "wiki_resp": True
+    }
+    assert mock_maps_position.called
+    assert mock_wiki_infos.called
+    assert mock_wiki_infos.params["kw"]
+
+
+def test_try_original_key_words_when_map_api_fails(monkeypatch):
+    def mock_maps_position(key_word):
+        mock_maps_position.called = True
+        return {
+            "map_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.maps_position', mock_maps_position)
+
+    mock_maps_position.called = False
+
+    assert gpy.try_original_key_words("original key words") == {"map_resp": False}
+    assert mock_maps_position.called
+
+
+def test_try_original_key_words_when_wiki_api_fails(monkeypatch):
+    def mock_maps_position(key_word):
+        mock_maps_position.called = True
+        return {
+            "key_words": "wiki key words",
+            "map_resp": True}
+
+    def mock_wiki_infos(key_word):
+        mock_wiki_infos.called = True
+        return {"wiki_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.maps_position', mock_maps_position)
+    monkeypatch.setattr('app.grandpy_bot.wiki_infos', mock_wiki_infos)
+
+    mock_maps_position.called = False
+    mock_wiki_infos.called = False
+
+    assert gpy.try_original_key_words("original key words") == {
+        "key_words": 'wiki key words',
+        "map_resp": True,
+        "wiki_resp": False
+    }
     assert mock_maps_position.called
     assert mock_wiki_infos.called
 
 
-def test_try_singled_key_words_when_both_api_succeeds(monkeypatch):
+def test_try_singled_key_words_for_all_api_which_succeed(monkeypatch):
     singled_key_words = (("kw1", "KW1"), ("kw2", "KW2"))
 
     def mock_maps_position(key_word):
@@ -164,7 +216,22 @@ def test_try_singled_key_words_when_both_api_succeeds(monkeypatch):
     assert mock_wiki_infos.called
 
 
-def test_try_singled_key_words_when_wiki_api_fails(monkeypatch):
+def test_try_singled_key_words_for_ball_api_but_map_api_fails(monkeypatch):
+    singled_key_words = (("kw1", "KW1"), ("kw2", "KW2"))
+
+    def mock_maps_position(key_word):
+        mock_maps_position.called = True
+        return {"map_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.maps_position', mock_maps_position)
+
+    mock_maps_position.called = False
+
+    assert gpy.try_singled_key_words(singled_key_words) == {"map_resp": False}
+    assert mock_maps_position.called
+
+
+def test_try_singled_key_words_for_all_api_but_wiki_api_fails(monkeypatch):
     singled_key_words = (("kw1", "KW1"), ("kw2", "KW2"))
 
     def mock_maps_position(key_word):
@@ -186,24 +253,61 @@ def test_try_singled_key_words_when_wiki_api_fails(monkeypatch):
     assert mock_wiki_infos.called
 
 
-def test_answer_if_parser_succeeds_and_api_requesting_succeeds_with_formated_key_words(monkeypatch):
+def test_try_singled_key_words_only_for_wiki_api_which_fails(monkeypatch):
+    singled_key_words = (("kw1", "KW1"), ("kw2", "KW2"))
+
+    def mock_wiki_infos(key_word):
+        mock_wiki_infos.called = True
+        return {"wiki_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.wiki_infos', mock_wiki_infos)
+
+    mock_wiki_infos.called = False
+
+    assert gpy.try_singled_key_words(singled_key_words, map_ok=True) == {"wiki_resp": False}
+    assert mock_wiki_infos.called
+
+
+def test_try_singled_key_words_only_for_wiki_api_which_succeeds(monkeypatch):
+    singled_key_words = (("kw1", "KW1"), ("kw2", "KW2"))
+
+    def mock_wiki_infos(key_word):
+        mock_wiki_infos.called = True
+        return {"wiki_resp": True}
+
+    monkeypatch.setattr('app.grandpy_bot.wiki_infos', mock_wiki_infos)
+
+    mock_wiki_infos.called = False
+
+    assert gpy.try_singled_key_words(singled_key_words, map_ok=True) == {"wiki_resp": True}
+    assert mock_wiki_infos.called
+
+
+def test_answer_if_parser_succeeds_and_api_succeeds_both_with_original_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
-        return {"formated": "fkw"}
+        return {"formated_original_key_words": "fkw"}
 
-    def mock_try_formated_key_words(parsed_question_dict):
-        mock_try_formated_key_words.called = True
-        return {"map_resp": True}
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
+        return {"map_resp": True, "wiki_resp": True}
+
+    def mock_try_singled_key_words(key_words_tuple):
+        mock_try_singled_key_words.called = True
+        return {"map_resp": True, "wiki_resp": True}
 
     monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
-    monkeypatch.setattr('app.grandpy_bot.try_formated_key_words', mock_try_formated_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
 
     mock_parse_question.called = False
-    mock_try_formated_key_words.called = False
+    mock_try_original_key_words.called = False
+    mock_try_singled_key_words.called = False
 
-    assert gpy.answer("whole_question") == {"map_resp": True}
+    assert gpy.answer("whole_question") == {"map_resp": True, "wiki_resp": True}
     assert mock_parse_question.called
-    assert mock_try_formated_key_words.called
+    assert mock_try_original_key_words.called
+    assert not mock_try_singled_key_words.called
 
 
 def test_answer_if_parser_fails(monkeypatch):
@@ -219,55 +323,137 @@ def test_answer_if_parser_fails(monkeypatch):
     assert mock_parse_question.called
 
 
-def test_answer_if_parser_succeeds_and_api_requesting_succeeds_with_singled_key_words(monkeypatch):
+def test_answer_if_parser_succeeds_and_api_succeed_both_with_singled_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
-        return {'formated': "fkw", 'singled': "skw"}
+        return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
 
-    def mock_try_formated_key_words(parsed_question_dict):
-        mock_try_formated_key_words.called = True
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
         return {"map_resp": False}
 
-    def mock_try_singled_key_words(parsed_question_dict):
+    def mock_try_singled_key_words(key_words_tuple):
         mock_try_singled_key_words.called = True
         return {"map_resp": True, "wiki_resp": True}
 
     monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
-    monkeypatch.setattr('app.grandpy_bot.try_formated_key_words', mock_try_formated_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
     monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
 
     mock_parse_question.called = False
-    mock_try_formated_key_words.called = False
+    mock_try_original_key_words.called = False
     mock_try_singled_key_words.called = False
 
     assert gpy.answer("whole_question") == {"map_resp": True, "wiki_resp": True}
     assert mock_parse_question.called
-    assert mock_try_formated_key_words.called
+    assert mock_try_original_key_words.called
     assert mock_try_singled_key_words.called
 
 
-def test_answer_if_parser_succeeds_but_api_requesting_fails_even_last_chance_try(monkeypatch):
+def test_answer_if_parser_succeeds_but_api_fails_both_with_singled_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
-        return {'formated': "fkw", 'singled': "skw"}
+        return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
 
-    def mock_try_formated_key_words(parsed_question_dict):
-        mock_try_formated_key_words.called = True
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
         return {"map_resp": False}
 
-    def mock_try_singled_key_words(parsed_question_dict):
+    def mock_try_singled_key_words(key_words_tuple):
+        mock_try_singled_key_words.called = True
+        return {"map_resp": False, "wiki_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
+
+    mock_parse_question.called = False
+    mock_try_original_key_words.called = False
+    mock_try_singled_key_words.called = False
+
+    assert gpy.answer("whole_question") == {"error": "Failing map API requesting even last chance try..."}
+    assert mock_parse_question.called
+    assert mock_try_original_key_words.called
+    assert mock_try_singled_key_words.called
+
+
+def test_answer_if_parser_succeeds_but_only_map_api_succeeds_with_singled_key_words(monkeypatch):
+    def mock_parse_question(quest):
+        mock_parse_question.called = True
+        return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
+
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
+        return {"map_resp": False}
+
+    def mock_try_singled_key_words(key_words_tuple):
         mock_try_singled_key_words.called = True
         return {"map_resp": True, "wiki_resp": False}
 
     monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
-    monkeypatch.setattr('app.grandpy_bot.try_formated_key_words', mock_try_formated_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
     monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
 
     mock_parse_question.called = False
-    mock_try_formated_key_words.called = False
+    mock_try_original_key_words.called = False
     mock_try_singled_key_words.called = False
 
-    assert gpy.answer("whole_question") == {"error": "Failing wiki API requesting..."}
+    assert gpy.answer("whole_question") == {"error": "Failing wiki API requesting even last chance try... "
+                                            "map API result is probably not pertinent..."}
     assert mock_parse_question.called
-    assert mock_try_formated_key_words.called
+    assert mock_try_original_key_words.called
+    assert mock_try_singled_key_words.called
+
+
+def test_answer_if_parser_succeeds_and_only_wiki_api_with_singled_key_words_which_fails(monkeypatch):
+    def mock_parse_question(quest):
+        mock_parse_question.called = True
+        return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
+
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
+        return {"map_resp": True, "wiki_resp": False}
+
+    def mock_try_singled_key_words(key_words_tuple, map_ok=True):
+        mock_try_singled_key_words.called = True
+        return {"wiki_resp": False}
+
+    monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
+
+    mock_parse_question.called = False
+    mock_try_original_key_words.called = False
+    mock_try_singled_key_words.called = False
+
+    assert gpy.answer("whole_question") == {"map_resp": True, "wiki_resp": False}
+    assert mock_parse_question.called
+    assert mock_try_original_key_words.called
+    assert mock_try_singled_key_words.called
+
+
+def test_answer_if_parser_succeeds_and_only_wiki_api_with_singled_key_words_which_succeeds(monkeypatch):
+    def mock_parse_question(quest):
+        mock_parse_question.called = True
+        return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
+
+    def mock_try_original_key_words(parsed_question_str):
+        mock_try_original_key_words.called = True
+        return {"map_resp": True, "wiki_resp": False}
+
+    def mock_try_singled_key_words(key_words_tuple, map_ok=True):
+        mock_try_singled_key_words.called = True
+        return {"wiki_resp": True}
+
+    monkeypatch.setattr('app.grandpy_bot.parse_question', mock_parse_question)
+    monkeypatch.setattr('app.grandpy_bot.try_original_key_words', mock_try_original_key_words)
+    monkeypatch.setattr('app.grandpy_bot.try_singled_key_words', mock_try_singled_key_words)
+
+    mock_parse_question.called = False
+    mock_try_original_key_words.called = False
+    mock_try_singled_key_words.called = False
+
+    assert gpy.answer("whole_question") == {"map_resp": True, "wiki_resp": True}
+    assert mock_parse_question.called
+    assert mock_try_original_key_words.called
     assert mock_try_singled_key_words.called

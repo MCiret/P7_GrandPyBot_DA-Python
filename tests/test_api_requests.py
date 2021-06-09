@@ -32,8 +32,36 @@ def test_parsing_of_resp_dict_to_location():
     mock_api_here_empty_resp_dict = {
         'items': []
     }
-    mock_api_here_filled_resp_dict = {
+    mock_api_here_filled_resp_dict_form1 = {
         'items': [{
+            'resultType': "xxxxx",
+            'xxxxxType': "yyy",
+            'address': {
+                'label': "add",
+                'yyy': "kw1"
+            },
+            'position': {
+                    'lat': "la",
+                    'lng': "lo",
+            }
+        }]
+    }
+    mock_api_here_filled_resp_dict_form2 = {
+        'items': [{
+            'resultType': "xxxxx",
+            'address': {
+                'label': "add",
+                'xxxxx': "kw2"
+            },
+            'position': {
+                    'lat': "la",
+                    'lng': "lo",
+            }
+        }]
+    }
+    mock_api_here_filled_resp_dict_form3 = {
+        'items': [{
+            'resultType': "xxxxx",
             'address': {
                 'label': "add",
             },
@@ -43,13 +71,29 @@ def test_parsing_of_resp_dict_to_location():
             }
         }]
     }
-
     assert api.resp_dict_to_location(mock_api_here_empty_resp_dict) == {"map_resp": False}
-    assert api.resp_dict_to_location(mock_api_here_filled_resp_dict) == {
+    assert api.resp_dict_to_location(mock_api_here_filled_resp_dict_form1) == {
         'map_resp': True,
         'address': "add",
         'lat': "la",
         'long': "lo",
+        'key_words': "kw1",
+        'apikey': cfg.HERE_API_KEY
+    }
+    assert api.resp_dict_to_location(mock_api_here_filled_resp_dict_form2) == {
+        'map_resp': True,
+        'address': "add",
+        'lat': "la",
+        'long': "lo",
+        'key_words': "kw2",
+        'apikey': cfg.HERE_API_KEY
+    }
+    assert api.resp_dict_to_location(mock_api_here_filled_resp_dict_form3) == {
+        'map_resp': True,
+        'address': "add",
+        'lat': "la",
+        'long': "lo",
+        'key_words': None,
         'apikey': cfg.HERE_API_KEY
     }
 

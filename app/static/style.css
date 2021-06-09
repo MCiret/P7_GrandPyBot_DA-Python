@@ -154,7 +154,24 @@ footer p, footer a
         margin-top: 15px;
     }
 }
-
+.loader
+{
+    /* background: url('../static/refresh.svg') no-repeat;
+    background-size: 40px 40px;
+    background-position: center; */
+    width: 40px;
+    height: 40px;
+    margin: auto auto auto auto;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.hide_loader
+{
+    display: none;
+}
 /* form */
 #user_request
 {

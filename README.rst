@@ -18,10 +18,9 @@ TABLE OF CONTENTS
     * `Required libraries`_
 
 3. `USAGE`_
-    * `json data examples`_
-    * `Database`_
-    * `OFF Search API query`_
-        1) Default usage
+    * `UI example`_
+    * `API data`_
+
 
 DESCRIPTION
 ===========
@@ -98,9 +97,9 @@ Steps
 
 4) Install required libraries : see the Required libraries section below.
 
-5) Set your personnel parameters for here.com API access :
+5) Set your personal parameters for here.com API access :
     * Get a free apikey by creating a "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account
-    * Copy + Paste your apikey as a string value replacing the '******' of HERE_API_KEY constant variable in config.py file.
+    * Copy + Paste your apikey as a string value replacing the '\*\*****' in HERE_API_KEY constant variable in config.py file.
 
 6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 
@@ -117,51 +116,35 @@ Python libraries to install in your virtual environment : $ pip install -r requi
 
 USAGE
 =====
-json data examples
-------------------
-**OFF search API response structure :**
+UI example
+----------
 
-.. _response.json:
-.. image:: ./ImagesReadme/OFF_search_API_response_1_product.png
+.. image:: ./readme_images/Grandpy_Bot_example.png
 
-|
-
-**Final list of valid products dict structure :**
-
-(after reorganization, see feature I.1.2)
-
-.. _valid_product.json:
-.. image:: ./ImagesReadme/1_valid_product.png
-
-Database
+API data
 --------
 
-**Each json field (see picture above) corresponds to one in the local database:**
+**Mapping with here.com:**
 
-see local_db_PDM_ below
+here.com API response (see UI example above for the submitted and parsed user question) :
 
-Table 'food' :
+.. image:: ./readme_images/here.com_raw_json_resp.png
 
-* "_id" = barcode
-* "product_name" = name
-* "nutriscore_grade" = Nutri-Score
-* "url" = url
-* "quantity" = quantity (optional field, used to specify some food product having same name but different barcode because of different quantity).
-* "compared_to_category" = compared_to_category (unique keyword used to find a relevant substitution food).
+here.com API response parsed by the back_end and returned to the front-end :
 
-Table 'category' :
+.. image:: ./readme_images/here.com_parsed_json_resp.png
 
-* "categories_tags" = list where each element is a row in the table (name field)
+**Wikipedia infos :**
+
+Wikipedia API response (see UI example above for the submitted and parsed user question) :
+
+.. image:: ./readme_images/wikipedia_raw_json_resp.png
+
+Wikipedia API response parsed by the back_end and returned to the front-end :
+
+.. image:: ./readme_images/wikipedia_parsed_json_resp.png
 
 
-Table 'store' :
-
-* "stores_tags" = list where each element is a row in the table (name field)
-
-**Local database :**
-
-.. _local_db_PDM:
-.. image:: ./ImagesReadme/local_db_schema.png
 
 .. |vPython badge| image:: https://img.shields.io/badge/Python-3.8-blue.svg
 .. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
