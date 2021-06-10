@@ -97,13 +97,12 @@ Steps
 
 4) Install required libraries : see the Required libraries section below.
 
-5) Set your own API key for here.com access :
-    * Get a free apikey by creating a "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account
-    * Copy + Paste your apikey as a string value replacing the os.environ.get('HERE_API_KEY') in HERE_API_KEY constant variable in config.py file.
+5) Environment variables to be set :
+    * HERE_API_KEY = API key for here.com access (see "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
 
 6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 
-7) Click on the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) to display interface in your browser.
+7) Follow the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) to display interface in your browser.
 
 Required libraries
 ------------------
