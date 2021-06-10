@@ -97,9 +97,9 @@ Steps
 
 4) Install required libraries : see the Required libraries section below.
 
-5) Set your personal parameters for here.com API access :
+5) Set your own API key for here.com access :
     * Get a free apikey by creating a "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account
-    * Copy + Paste your apikey as a string value replacing the '\*\*****' in HERE_API_KEY constant variable in config.py file.
+    * Copy + Paste your apikey as a string value replacing the os.environ.get('HERE_API_KEY') in HERE_API_KEY constant variable in config.py file.
 
 6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 

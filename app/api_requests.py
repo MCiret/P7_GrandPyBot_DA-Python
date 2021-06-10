@@ -1,6 +1,5 @@
 import requests
 import config as cfg
-import json
 
 
 def api_request_and_get_dict_resp(url, **params) -> dict:

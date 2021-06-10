@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request
+from flask import render_template, request
 from . import app
 import app.grandpy_bot as gpy
 
