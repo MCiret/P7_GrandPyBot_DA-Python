@@ -98,6 +98,7 @@ Steps
 4) Install required libraries : see the Required libraries section below.
 
 5) Environment variables to be set :
+
     * HERE_API_KEY = API key for here.com access (see "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
 
 6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
