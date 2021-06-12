@@ -1,6 +1,6 @@
 /* This is the "main" JavaScript script :
-    - Event listening
-    - Event reaction : fetch data to backend and then format + display the response
+    - Form submit event listening
+    - Reaction : display the user's question and fetch it to backend. Format + display the response.
 */
 
 
@@ -8,10 +8,12 @@
 
 let form = document.querySelector("#user_request");
 let user_text = document.querySelector("#question");
+/* Loader icon during Gpy Bot answering */
 let loader_div = document.createElement('img');
 loader_div.src = '../static/refresh.svg';
 loader_div.alt = 'icone loader';
 loader_div.className = 'hide_loader';
+/* Elements where the discuss will be displayed */
 let chat_div = document.querySelector("#chat");
 let map_div = document.querySelector("#map");
 

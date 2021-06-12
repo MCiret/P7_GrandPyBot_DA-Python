@@ -3,8 +3,7 @@ The object is 1 interaction (i.e 1 user's question + 1 GrandPy Bot answer).
 
 Question = The user's input and the animated loader icon.
 
-Answer = 1 address (text) + 1 here.com Map with the mark (see map.js) + 1 Wikipedia link (see wiki.js)
-for the location extracted from the user's question (if the location has been found by here.com)
+Answer = 1 address (text) + marked Map (see map.js) + start and link of Wikipedia article.
 */
 
 'use strict';
@@ -34,7 +33,9 @@ class OneDiscuss {
     format_question() {
         this.msg_div = document.createElement('p');
         this.msg_div.id = "msg";
-        this.msg_div.innerHTML = "Vous : " + this.question + "<br><br>";
+        /* Protected against XSS attack */
+        this.msg_div.textContent = "Vous : " + this.question;
+        this.msg_div.insertAdjacentHTML('beforeend', "<br><br>");
     }
 
     format_map_answer(map_div) {

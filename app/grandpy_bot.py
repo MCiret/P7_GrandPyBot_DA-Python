@@ -31,8 +31,8 @@ def try_original_key_words(formated_original_key_words: str) -> dict:
     """
     Requests API using original parsed key words.
 
-    To elevate results accuracy : if more relevant key words could be parsed from map API response parsing then it is
-    used for Wikipedia request. Else original parsed key words are also used for Wikipedia request.
+    To elevate results accuracy : if more relevant key words exists in map API response (see maps_position docstring)
+    they are firstly used for Wikipedia request. Else original parsed key words are tried for Wikipedia request.
     """
 
     map_api_resp = maps_position(formated_original_key_words)

@@ -10,7 +10,7 @@ def api_request_and_get_dict_resp(url, **params) -> dict:
 def resp_dict_to_location(here_api_resp_dict: dict) -> dict:
     """
     Keeps interesting data from here.com API response.
-    Ideally also key words then used to request Wikipedia API
+    Ideally, if exists, it keeps also key words then used to request Wikipedia API.
     """
 
     if len(here_api_resp_dict['items']) > 0:
