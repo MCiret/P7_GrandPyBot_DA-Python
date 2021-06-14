@@ -17,7 +17,7 @@ def test_parse_question_return_none_if_failure(monkeypatch):
 def test_parse_question_return_dict_if_success(monkeypatch):
     def mock_extract_interesting_tokens(parser):
         mock_extract_interesting_tokens.called = True
-        parser.interesting_tokens = ["some", "tokens"]
+        parser.interesting_tokens = ["Some", "Tokens"]
 
     def mock_word_reverse_case_first_char(word):
         mock_word_reverse_case_first_char.called = True
@@ -30,10 +30,10 @@ def test_parse_question_return_dict_if_success(monkeypatch):
     mock_word_reverse_case_first_char.called = False
     parse_question_result = {
         'formated_original_key_words': "Some Tokens",
-        'singled_key_words': (("some", "Some"), ("tokens", "Tokens"),)
+        'singled_key_words': (("Some", "reversed_case"), ("Tokens", "reversed_case"),)
     }
 
-    gpy.parse_question("qu") == parse_question_result
+    assert gpy.parse_question("qu") == parse_question_result
     assert mock_extract_interesting_tokens.called
     assert mock_word_reverse_case_first_char.called
 
