@@ -105,7 +105,6 @@ footer p, footer a
 #chat_map_container
 {
     display: flex;
-    /* justify-content: space-around; */
     align-items: center;
 }
 @media all and (max-width: 1024px)

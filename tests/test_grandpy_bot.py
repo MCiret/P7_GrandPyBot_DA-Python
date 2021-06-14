@@ -98,7 +98,7 @@ def test_wiki_infos_is_using_passed_argument(monkeypatch):
     assert mock_resp_dict_to_wiki_infos.params["resp_dict"] == "wiki_api_request_resp_dict"
 
 
-def test_try_original_key_words_when_api_succeed_both_using_map_api_key_words_for_wiki_api(monkeypatch):
+def test_try_original_key_words_when_both_api_succeed_but_using_map_api_key_words_for_wiki_api(monkeypatch):
     def mock_maps_position(key_word):
         mock_maps_position.called = True
         return {
@@ -126,7 +126,7 @@ def test_try_original_key_words_when_api_succeed_both_using_map_api_key_words_fo
     assert mock_wiki_infos.params["kw"] == "wiki_key_words"
 
 
-def test_try_original_key_words_when_api_succeed_both_using_original_key_words(monkeypatch):
+def test_try_original_key_words_when_both_api_succeed_using_original_key_words(monkeypatch):
     def mock_maps_position(key_word):
         mock_maps_position.called = True
         return {
@@ -283,7 +283,7 @@ def test_try_singled_key_words_only_for_wiki_api_which_succeeds(monkeypatch):
     assert mock_wiki_infos.called
 
 
-def test_answer_if_parser_succeeds_and_api_succeeds_both_with_original_key_words(monkeypatch):
+def test_answer_if_parser_succeeds_and_both_api_succeeds_with_original_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
         return {"formated_original_key_words": "fkw"}
@@ -323,7 +323,7 @@ def test_answer_if_parser_fails(monkeypatch):
     assert mock_parse_question.called
 
 
-def test_answer_if_parser_succeeds_and_api_succeed_both_with_singled_key_words(monkeypatch):
+def test_answer_if_parser_succeeds_and_both_api_succeed_with_singled_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
         return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}
@@ -350,7 +350,7 @@ def test_answer_if_parser_succeeds_and_api_succeed_both_with_singled_key_words(m
     assert mock_try_singled_key_words.called
 
 
-def test_answer_if_parser_succeeds_but_api_fails_both_with_singled_key_words(monkeypatch):
+def test_answer_if_parser_succeeds_but_both_api_fails_with_singled_key_words(monkeypatch):
     def mock_parse_question(quest):
         mock_parse_question.called = True
         return {'formated_original_key_words': "fkw", 'singled_key_words': "skw"}

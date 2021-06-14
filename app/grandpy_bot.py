@@ -89,7 +89,7 @@ def answer(whole_question: str) -> dict:
     Step by step:
     1) Parses the user question.
     2) If parsing got one or several key words, they are used together to request the API.
-        2.1) If API both got a positive response, they are returned.
+        2.1) If both API got a positive response, they are returned.
         2.2) If only map API got a positive response, key words are used separately for requesting Wikipedia API.
             2.2.1) If Wikipedia API still got a negative response, only the API response is returned.
             2.2.2) If Wikipedia API got a positive response, it is returned with the map API response.
