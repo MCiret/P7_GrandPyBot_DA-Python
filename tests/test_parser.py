@@ -48,6 +48,7 @@ class TestParser:
     @staticmethod
     def test_capitalize_text():
         assert Parser.capitalize_text("Ou est Albi en france ?") == "Ou Est Albi En France ?"
+        assert Parser.capitalize_text("l'adresse d'Openclassrooms") == "Adresse Openclassrooms"
 
     @staticmethod
     def test_capitalize_words_list():

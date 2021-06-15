@@ -11,8 +11,8 @@ class Parser:
     """
 
     NLP = spacy.load('fr_core_news_sm')
-    WANTED_ENT_TYPE = ('LOC', 'GPE', 'FAC')
-    NOT_WANTED_NOUN = ('bonjour', 'hello', 'aurevoir', 'au revoir', 'gpy', 'grandpy', 'salut')
+    WANTED_ENT_TYPE = ('LOC', 'GPE', 'FAC', 'PER')
+    NOT_WANTED_NOUN = ('bonjour', 'hello', 'aurevoir', 'au revoir', 'gpy', 'grandpy', 'salut', 'adresse')
 
     def __init__(self, text: str):
         self.text_tokens = Parser.NLP(Parser.capitalize_text(text))
@@ -52,7 +52,11 @@ class Parser:
     def capitalize_text(text: str) -> str:
         words = text.split()
         for i, w in enumerate(words):
-            words[i] = w.capitalize()
+            if w.find("'") == -1:
+                words[i] = w.capitalize()
+            else:
+                w = w[w.find("'")+1:]
+                words[i] = w.capitalize()
         return " ".join(words)
 
     @staticmethod
