@@ -31,7 +31,7 @@ class Parser:
     def is_token_place_entity(token) -> bool:
         if token.ent_type_ in Parser.WANTED_ENT_TYPE:
             return True
-        elif token.pos_ == "VERB" && Parser.NLP(Parser.capitalize_text(token.text))[0].ent_type_ == "LOC":
+        elif token.pos_ == "VERB" and Parser.NLP(Parser.capitalize_text(token.text))[0].ent_type_ == "LOC":
             return True
         else:
             return False
