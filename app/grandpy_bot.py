@@ -11,7 +11,7 @@ def parse_question(whole_question: str) -> dict:
         return None
 
     return {
-        "formated_original_key_words": " ".join(parsed_question.interesting_tokens),
+        "formated_original_key_words": "".join(parsed_question.interesting_tokens),
         "singled_key_words": tuple((kw, Parser.word_reverse_case_first_char(kw))
                                    for kw in parsed_question.interesting_tokens)
     }

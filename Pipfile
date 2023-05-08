@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+fr-core-news-sm = { file = 'https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.5.0/fr_core_news_sm-3.5.0-py3-none-any.whl' }
+gunicorn = "*"
+requests = "*"
+spacy = "*"
+
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
