@@ -3,7 +3,7 @@
 =====================
 **Searching for a spot address**
 
-🔗 https://grandpy.purbeurre-mcda.tk/
+🔗 https://grandpybot.p7.mc-dapy.fr/
 
 |Status badge| |UIlanguage badge|
 
