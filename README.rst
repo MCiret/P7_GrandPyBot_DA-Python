@@ -5,7 +5,8 @@
 
 🔗 https://grandpybot.p7.mc-dapy.fr/
 
-|Status badge| |UIlanguage badge|
+|Status badge| |vPython badge| 
+|UIlanguage badge| |vHTML badge| |vCSS badge| |JavaScript badge|
 
 *****************
 TABLE OF CONTENTS
@@ -84,50 +85,31 @@ Steps
 -----
 
 1) Download the project : use the "Code" (green button) and unzip the P7_GrandPyBot_DA-Python-master.zip file.
-2) Python3 comes with Python Package Manager (pip) else you have to install it (https://pip.pypa.io/en/stable/installing/)
+2) Install Python package managers
+    * 
 
 3) Set up a virtual environment :
 
-    NB: the symbol $ flags the commands prompt
 
-    * UNIX operating system :
-        3.1) Install the Python module : ``$ pip install pipenv``
+        3.1) Install the Python module : ``$ pip install pipenv`` or ``$ pipx install pipenv`` (pipx has to be installed unsing pip)
 
         3.2) Navigate to the project main directory using command prompt : ``$ cd .....``
 
-        3.3) Create a virtual environment : ``$ pipenv install``
+        3.3) Create a virtual environment : ``$ pipenv install`` --> Pipfile packages are installed
 
         3.4) Activate the virtual environment : ``$ pipenv shell``
 
 
-    * DOS operating system :
-        3.1) Install the Python module : $ pip install venv
-
-        3.2) Navigate to the project main directory using command prompt : $ cd .....
-
-        3.3) Create a virtual environment : $ py -m venv name_of_your_virtual_env
-
-        3.4) Activate the virtual environment : $ .\name_of_your_virtual_env\Scripts\activate
 
 
-4) Install required libraries : see the Required libraries section below.
-
-5) Environment variables to be set :
+4) Environment variables to be set :
 
     * DEBUG --> 1 for local/dev run | 0 for prod
     * HERE_API_KEY --> API key for here.com access
 
-6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
+5) Run the code source main.py file : (UNIX) ``$ python ./main.py`` (DOS) ``$ py main.py``
 
-7) Follow the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) to display interface in your browser.
-
-Required libraries
-------------------
-|vPython badge|
-|vHTML badge| |vCSS badge| |JavaScript badge|
-
-
-Python libraries to install in your virtual environment : $ pip install -r requirements.txt
+6) Follow the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) --> Web app interface is siplayed in the browser.
 
 
 
@@ -163,7 +145,7 @@ Wikipedia API response parsed by the back_end and returned to the front-end :
 
 
 
-.. |vPython badge| image:: https://img.shields.io/badge/Python-3.9-blue.svg
+.. |vPython badge| image:: https://img.shields.io/badge/Python-3.11-blue.svg
 .. |vHTML badge| image:: https://img.shields.io/badge/HTML-5-orange.svg
 .. |vCSS badge| image:: https://img.shields.io/badge/CSS-3-blue.svg
 .. |JavaScript badge| image:: https://img.shields.io/badge/JavaScript-.-yellow.svg
