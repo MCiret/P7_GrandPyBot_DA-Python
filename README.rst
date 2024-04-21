@@ -1,6 +1,6 @@
-=====================
-"GrandPy bot" project
-=====================
+================================
+"GrandPy bot" (learning) project
+================================
 **Searching for a spot address**
 
 🔗 https://grandpybot.p7.mc-dapy.fr/
@@ -12,6 +12,7 @@ TABLE OF CONTENTS
 *****************
 
 1. `DESCRIPTION`_
+    * `Learning project`_
     * `Summary`_
     * `Feature and scenario`_
 
@@ -26,6 +27,17 @@ TABLE OF CONTENTS
 
 DESCRIPTION
 ===========
+
+Learning project
+----------------
+This Web app has been developed during OpenClassrooms training course "Python Application Development".
+
+**GOAL** :
+ 
+* very 1st Web app using Flask framework (minimalist : 1 route, no DB, no tests)
+* AJAX + HTML/CSS basics
+* "Like NLP" logic/algo (option : use a third library --> SpaCy had been chosen)
+* Third API calls
 
 Summary
 -------
