@@ -32,6 +32,7 @@ Summary
 User could ask (french only) for locating a place to user by entering a question in an text input field and submit it.
 
 A robot (GrandPy Bot) parses (tiny NLP) user input and requests 2 API :
+
 * HERE.com to get the address and pinned it on a map,
 * Wikipedia to get infos article (intro + url are displayed).
 
