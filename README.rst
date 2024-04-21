@@ -29,12 +29,12 @@ DESCRIPTION
 
 Summary
 -------
-This Web application suggests questioning for locating a place to user by entering a question in an text input field and submit it.
+User could ask (french only) for locating a place to user by entering a question in an text input field and submit it.
 
-A robot (GrandPy Bot) parses the text input and requests here.com API to obtain and display the place address and a map marked with it.
-It also requests Wikipedia API to obtain an article (if it exists) about the place and display the url and the start of it.
+A robot (GrandPy Bot) parses (tiny NLP) user input and requests 2 API :
+- HERE.com to get the address and pinned it on a map,
+- Wikipedia to get infos article (intro + url are displayed).
 
-*NB: this source code is for french User Interface.*
 
 Feature and scenario
 --------------------
