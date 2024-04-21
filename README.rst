@@ -91,13 +91,13 @@ Steps
     NB: the symbol $ flags the commands prompt
 
     * UNIX operating system :
-        3.1) Install the Python module : $ pip install venv
+        3.1) Install the Python module : ``$ pip install pipenv``
 
-        3.2) Navigate to the project main directory using command prompt : $ cd .....
+        3.2) Navigate to the project main directory using command prompt : ``$ cd .....``
 
-        3.3) Create a virtual environment : $ python -m venv name_of_your_virtual_env
+        3.3) Create a virtual environment : ``$ pipenv install``
 
-        3.4) Activate the virtual environment : $ source name_of_your_virtual_env/bin/activate
+        3.4) Activate the virtual environment : ``$ pipenv shell``
 
 
     * DOS operating system :
@@ -114,7 +114,8 @@ Steps
 
 5) Environment variables to be set :
 
-    * HERE_API_KEY = API key for here.com access (see "Freemium" account : https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
+    * DEBUG --> 1 for local/dev run | 0 for prod
+    * HERE_API_KEY --> API key for here.com access
 
 6) Run the code source main.py file : (UNIX) python ./main.py (DOS) py main.py
 
@@ -127,6 +128,7 @@ Required libraries
 
 
 Python libraries to install in your virtual environment : $ pip install -r requirements.txt
+
 
 
 USAGE
