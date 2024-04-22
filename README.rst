@@ -5,7 +5,7 @@
 
 🔗 https://grandpybot.p7.mc-dapy.fr/
 
-|Status badge| |vPython badge| 
+|Status badge| |vPython badge|
 |UIlanguage badge| |vHTML badge| |vCSS badge| |JavaScript badge|
 
 *****************
@@ -34,7 +34,7 @@ Learning project
 This Web app has been developed during OpenClassrooms training course "Python Application Development".
 
 **GOAL** :
- 
+
 * very 1st Web app using Flask framework (minimalist : 1 route, no DB, no tests)
 * AJAX + HTML/CSS basics
 * "Like NLP" logic/algo (option : use a third library --> SpaCy had been chosen)
@@ -85,22 +85,15 @@ Steps
 -----
 
 1) Download the project : use the "Code" (green button) and unzip the P7_GrandPyBot_DA-Python-master.zip file.
-2) Install Python package managers
-    * 
+2) Python3 comes with Python Package Manager (pip) else you have to install it (https://pip.pypa.io/en/stable/installing/)
 
 3) Set up a virtual environment :
 
+    3.1) ``$ pip install pipx`` then ``$ pipx install pipenv``
 
-        3.1) Install the Python module : ``$ pip install pipenv`` or ``$ pipx install pipenv`` (pipx has to be installed unsing pip)
+    3.2) Create a virtual environment and Install project requirements (Pipfile) : ``$ pipenv install``
 
-        3.2) Navigate to the project main directory using command prompt : ``$ cd .....``
-
-        3.3) Create a virtual environment : ``$ pipenv install`` --> Pipfile packages are installed
-
-        3.4) Activate the virtual environment : ``$ pipenv shell``
-
-
-
+    3.3) Activate the virtual environment : ``$ pipenv shell``
 
 4) Environment variables to be set :
 
@@ -110,7 +103,6 @@ Steps
 5) Run the code source main.py file : (UNIX) ``$ python ./main.py`` (DOS) ``$ py main.py``
 
 6) Follow the http:// link given by Flask starting message on the terminal output (usually http://127.0.0.1:5000/) --> Web app interface is siplayed in the browser.
-
 
 
 USAGE
