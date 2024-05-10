@@ -20,9 +20,8 @@ def parse_question(whole_question: str) -> dict:
 
 
 def maps_position(location: str) -> dict:
-    logging.basicConfig(level=logging.INFO)
-    logging.debug('maps_position - Ce message ne sera pas affiché')
-    logging.info('maps_position - Ce message sera affiché')
+    logging.basicConfig(level=logging.DEBUG)
+    logging.debug("maps_position - cfg.HERE_API_KEY = {cfg.HERE_API_KEY}")
     print(">>>>>>>>>> PRINT in maps_position() function <<<<<<<<<<")
     return api.resp_dict_to_location(
                 api.api_request_and_get_dict_resp(cfg.HERE_API_URL, apiKey=cfg.HERE_API_KEY, q=location))
