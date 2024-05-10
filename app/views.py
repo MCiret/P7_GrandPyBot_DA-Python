@@ -5,6 +5,7 @@ import app.grandpy_bot as gpy
 
 @app.route("/")
 def home():
+    print(">>>>>>>>>> PRINT in home() view <<<<<<<<<<")
     return render_template("index.html")
 
 

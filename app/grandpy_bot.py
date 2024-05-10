@@ -20,6 +20,8 @@ def parse_question(whole_question: str) -> dict:
 def maps_position(location: str) -> dict:
     return api.resp_dict_to_location(
                 api.api_request_and_get_dict_resp(cfg.HERE_API_URL, apiKey=cfg.HERE_API_KEY, q=location))
+    # return api.resp_dict_to_location(
+    #             api.api_request_and_get_dict_resp(cfg.HERE_API_URL, apiKey=cfg.HERE_API_KEY, q=location))
 
 
 def wiki_infos(location: str) -> dict:
