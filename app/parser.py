@@ -16,9 +16,6 @@ class Parser:
 
     def __init__(self, text: str):
         self.text_tokens = Parser.NLP(text)
-        print("text_tokens", self.text_tokens)
-        for token in self.text_tokens:
-            print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.shape_, token.is_alpha, token.is_stop, token.ent_type_)
 
     def extract_interesting_tokens(self):
         self.interesting_tokens = []
