@@ -11,5 +11,6 @@ def home():
 
 @app.route("/", methods=["POST"])
 def ajax():
+    print(">>>>>>>>>> PRINT in ajax() view <<<<<<<<<<")
     text = request.form["question"]
     return(gpy.answer(text))
