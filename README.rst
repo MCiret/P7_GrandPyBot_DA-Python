@@ -35,10 +35,11 @@ This Web app has been developed during OpenClassrooms training course "Python Ap
 
 **GOAL** :
 
-* very 1st Web app using Flask framework (minimalist : 1 route, no DB, no tests)
+* very 1st Web app using Flask framework (minimalist : 1 route, no DB)
 * AJAX + HTML/CSS basics
 * "Like NLP" logic/algo (option : use a third library --> SpaCy had been chosen)
 * Third API calls
+* Tests basics (including Mock (with manual monkeypatching))
 
 Summary
 -------

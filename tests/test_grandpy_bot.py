@@ -29,7 +29,7 @@ def test_parse_question_return_dict_if_success(monkeypatch):
     mock_extract_interesting_tokens.called = False
     mock_word_reverse_case_first_char.called = False
     parse_question_result = {
-        'formated_original_key_words': "Some Tokens",
+        'formated_original_key_words': "SomeTokens",
         'singled_key_words': (("Some", "reversed_case"), ("Tokens", "reversed_case"),)
     }
 
@@ -39,11 +39,11 @@ def test_parse_question_return_dict_if_success(monkeypatch):
 
 
 def test_maps_position_is_using_passed_argument(monkeypatch):
-    def mock_api_request_and_get_dict_resp(url, apikey, q):
+    def mock_api_request_and_get_dict_resp(url, apiKey, q):
         mock_api_request_and_get_dict_resp.called = True
         mock_api_request_and_get_dict_resp.params = {
             "url": url,
-            "apikey": apikey,
+            "apiKey": apiKey,
             "q": q,
         }
         return "here_api_request_resp_dict"

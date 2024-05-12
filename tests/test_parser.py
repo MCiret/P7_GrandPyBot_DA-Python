@@ -9,6 +9,7 @@ class TestParser:
         def __init__(self, ent_type=None, stop_word_bool=None):
             self.ent_type_ = ent_type
             self.is_stop = stop_word_bool
+            self.pos_ = "Mock pos_"
 
     @staticmethod
     def test_is_token_place_entity():
@@ -35,7 +36,7 @@ class TestParser:
         Parser.is_stop_word = mock_is_stop_word
 
         self.PARSER.extract_interesting_tokens()
-        assert self.PARSER.interesting_tokens == ['Où', 'Est', 'Le', 'Taj', 'Mahal', '?']
+        assert self.PARSER.interesting_tokens == ['où', 'est', 'le', 'taj', 'mahal', '?']
 
         Parser.is_token_place_entity = bkup_is_place_entity
         Parser.is_stop_word = bkup_is_stop_word
